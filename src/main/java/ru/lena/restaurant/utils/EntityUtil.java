@@ -31,7 +31,9 @@ public class EntityUtil {
     }
 
     public static RestaurantTo asTo(Restaurant restaurant) {
-        return new RestaurantTo(restaurant.getId(), restaurant.getName(), restaurant.getScore(), restaurant.getAllDishPrice());
+        RestaurantTo to = new RestaurantTo(restaurant.getId(), restaurant.getName(), restaurant.getScore(), restaurant.getAllDishPrice());
+
+        return to;
     }
 
     public static VoteHistoryTo asTo(VoteHistory voteHistory) {

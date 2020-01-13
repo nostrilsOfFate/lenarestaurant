@@ -6,12 +6,15 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
+import ru.lena.restaurant.model.Dish;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.beans.ConstructorProperties;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 @NoArgsConstructor
 @Getter
@@ -28,6 +31,9 @@ public class RestaurantTo extends BaseTo implements Serializable {
     @NotBlank
     private Integer score = 0;
 
+    @NotBlank
+    @SafeHtml
+    private Set<Dish> menu = new HashSet<>();
 
     @Range(min = 0)
     @NotBlank
@@ -35,10 +41,11 @@ public class RestaurantTo extends BaseTo implements Serializable {
     BigDecimal allDishPrice = BigDecimal.ZERO;
 
 
-    public RestaurantTo(String name, Integer score, BigDecimal allDishPrice) {
+    public RestaurantTo(String name, Integer score, BigDecimal allDishPrice,Set<Dish> menu) {
         this.name = name;
         this.score = score;
         this.allDishPrice = allDishPrice;
+        this.menu = menu;
     }
 
     @ConstructorProperties({"id", "name", "score", "allDishPrice"})

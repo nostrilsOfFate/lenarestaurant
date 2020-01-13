@@ -24,9 +24,6 @@ class VoteHistoryServiceImplTest {
     @Autowired
     private VoteHistoryRepository repository;
 
-    @Autowired
-    private RestaurantService restaurantService;
-
     @Test
     void delete() {
         service.delete(1L);

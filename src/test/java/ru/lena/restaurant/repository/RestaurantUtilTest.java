@@ -52,7 +52,7 @@ public class RestaurantUtilTest {
     @Test
     public void findAllByOrderByNameDescTest() {
         List<Restaurant> expected = restaurantRepository.findAll().stream()
-                .sorted(Comparator.comparing(Restaurant::getName))
+                .sorted(Comparator.comparing(Restaurant::getName).reversed())
                 .collect(Collectors.toList());
         assertNotNull(expected);
         List<Restaurant> actual = restaurantRepository.findAllByOrderByNameDesc();

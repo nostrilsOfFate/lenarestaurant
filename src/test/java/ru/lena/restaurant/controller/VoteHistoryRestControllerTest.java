@@ -47,7 +47,7 @@ public class VoteHistoryRestControllerTest {
         List<VoteHistoryTo> historyList = EntityUtil.asToList(service.getAll());
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get("/rest/admin/voteHistory")
+                .get("/rest/admin/history")
                 .accept(MediaType.APPLICATION_JSON_VALUE);
         this.mvc.perform(requestBuilder).andExpect(status().isOk())
                 .andExpect(content().json(listAsJsonString(historyList)))
@@ -61,7 +61,7 @@ public class VoteHistoryRestControllerTest {
         VoteHistoryTo voteHistoryTo = EntityUtil.asTo(service.get(1L));
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get("/rest/admin/voteHistory/{id}", 1L)
+                .get("/rest/admin/history/{id}", 1L)
                 .accept(MediaType.APPLICATION_JSON_VALUE);
         this.mvc.perform(requestBuilder).andExpect(status().isOk())
                 .andExpect(content().json(asJsonString(voteHistoryTo)))
@@ -73,7 +73,7 @@ public class VoteHistoryRestControllerTest {
     @Test
     void delete() throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .delete("/rest/admin/voteHistory/{id}", 1L)
+                .delete("/rest/admin/history/{id}", 1L)
                 .with(csrf());
         this.mvc.perform(requestBuilder).andExpect(status().isNoContent()).andReturn();
     }
@@ -84,7 +84,7 @@ public class VoteHistoryRestControllerTest {
         List<VoteHistoryTo> historyList = EntityUtil.asToList(service.findAllByRestaurantId(1L));
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get("/rest/admin/voteHistory/restaurant/{id}", 1L)
+                .get("/rest/admin/history/restaurant/{id}", 1L)
                 .accept(MediaType.APPLICATION_JSON_VALUE);
         this.mvc.perform(requestBuilder).andExpect(status().isOk())
                 .andExpect(content().json(listAsJsonString(historyList)))
@@ -98,7 +98,7 @@ public class VoteHistoryRestControllerTest {
         List<VoteHistoryTo> historyList = EntityUtil.asToList(service.findAllSorted());
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get("/rest/admin/voteHistory/sorted")
+                .get("/rest/admin/history/sorted")
                 .accept(MediaType.APPLICATION_JSON_VALUE);
         this.mvc.perform(requestBuilder).andExpect(status().isOk())
                 .andExpect(content().json(listAsJsonString(historyList)))
@@ -112,7 +112,7 @@ public class VoteHistoryRestControllerTest {
         List<VoteHistoryTo> historyList = EntityUtil.asToList(service.findAllSortedByScore(15));
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get("/rest/admin/voteHistory/sorted/{score}", 15)
+                .get("/rest/admin/history/sorted/{score}", 15)
                 .accept(MediaType.APPLICATION_JSON_VALUE);
         this.mvc.perform(requestBuilder).andExpect(status().isOk())
                 .andExpect(content().json(listAsJsonString(historyList)))
@@ -133,7 +133,7 @@ public class VoteHistoryRestControllerTest {
                 }).collect(Collectors.toList()));
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get("/rest/admin/voteHistory/sorted/between")
+                .get("/rest/admin/history/sorted/between")
                 .param("startDate", "2019-02-03")
                 .param("endDate", "2019-02-04")
                 .accept(MediaType.APPLICATION_JSON_VALUE);
