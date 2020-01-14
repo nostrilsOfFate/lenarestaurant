@@ -94,7 +94,7 @@ public class VoteHistoryServiceImpl implements VoteHistoryService {
      * Log all restaurants to history table
      * at 23:00 every day
      */
-    @Scheduled(cron = "0 23 * * * *")
+    @Scheduled(cron = "0 0 23 * * *")
     @CacheEvict(value = "voteHistories", allEntries = true)
     @Transactional
     public void updateVoteHistory() {

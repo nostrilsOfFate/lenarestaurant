@@ -27,7 +27,7 @@ class RestaurantServiceImplTest {
 
     @Test
     void create() {
-        Restaurant expected = new Restaurant(null,"new Restaurant",0,null);
+        Restaurant expected = new Restaurant(null,"new Restaurant");
         Restaurant created = service.create(EntityUtil.asTo(expected));
         assertNotNull(created);
         Long newId = created.getId();

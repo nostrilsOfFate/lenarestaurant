@@ -10,6 +10,7 @@ import ru.lena.restaurant.to.VoteHistoryTo;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -27,12 +28,12 @@ public class EntityUtil {
     }
 
     public static Restaurant createNewFromTo(RestaurantTo restaurantTo) {
-        return new Restaurant(null, restaurantTo.getName(), restaurantTo.getScore(), null);
+        return new Restaurant(null, restaurantTo.getName(), restaurantTo.getScore(), asSetDishes(restaurantTo.getMenu()));
     }
 
     public static RestaurantTo asTo(Restaurant restaurant) {
         RestaurantTo to = new RestaurantTo(restaurant.getId(), restaurant.getName(), restaurant.getScore(), restaurant.getAllDishPrice());
-
+        to.setMenu(asToListDishesSet(restaurant.getMenu()));
         return to;
     }
 
@@ -57,11 +58,37 @@ public class EntityUtil {
                 .collect(Collectors.toList());
     }
 
+    public static Set<DishTo> asToListDishesSet(Collection<Dish> dishes) {
+        return dishes.stream()
+                .map(EntityUtil::asTo)
+                .collect(Collectors.toSet());
+    }
+
+
+    public static List<Dish> asListDishes(Collection<DishTo> dishes) {
+        return dishes.stream()
+                .map(EntityUtil::createNewFromTo)
+                .collect(Collectors.toList());
+    }
+
+    public static Set<Dish> asSetDishes(Collection<DishTo> dishes) {
+        return dishes.stream()
+                .map(EntityUtil::createNewFromTo)
+                .collect(Collectors.toSet());
+    }
+
     public static List<RestaurantTo> asToListRest(Collection<Restaurant> restaurants) {
         return restaurants.stream()
                 .map(EntityUtil::asTo)
                 .collect(Collectors.toList());
     }
+
+    public static List<Restaurant> asListRest(Collection<RestaurantTo> restaurants) {
+        return restaurants.stream()
+                .map(EntityUtil::createNewFromTo)
+                .collect(Collectors.toList());
+    }
+
     public static List<UserTo> asToListUsers(Collection<User> users) {
         return users.stream()
                 .map(EntityUtil::asTo)

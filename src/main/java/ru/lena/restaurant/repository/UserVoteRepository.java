@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.lena.restaurant.model.UserVote;
 
+import java.util.Optional;
+
 @Repository
 public interface UserVoteRepository extends JpaRepository<UserVote, Long> {
 
@@ -17,4 +19,8 @@ public interface UserVoteRepository extends JpaRepository<UserVote, Long> {
     int delete(@Param("id") long id);
 
     boolean existsByUserId(Long id);
+
+    int deleteAllByUserId(long userId);
+
+    Optional<UserVote> findByUserId(long userId);
 }

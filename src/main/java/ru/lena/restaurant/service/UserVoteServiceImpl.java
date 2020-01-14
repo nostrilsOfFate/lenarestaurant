@@ -28,7 +28,7 @@ public class UserVoteServiceImpl implements UserVoteService {
     @Override
     public UserVote getByUserId(long userId) {
         log.debug("get vote for user with id {}", userId);
-        return repository.findById(userId).orElse(null);
+        return repository.findByUserId(userId).orElse(null);
     }
 
     @Override
@@ -41,6 +41,12 @@ public class UserVoteServiceImpl implements UserVoteService {
     public UserVote addVote(long userId, long restaurantId) {
         log.debug("Vote for restaurant {} by user with id {}", restaurantId, userId);
         return repository.save(new UserVote(userId, restaurantId));
+    }
+
+    @Override
+    public void deleteAllForUSer(long userId) {
+        log.debug("Delete all for votes for user with id {}", userId);
+        repository.deleteAllByUserId(userId);
     }
 
     @Scheduled(cron = "0 0 23 * * ?")

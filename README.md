@@ -1,12 +1,14 @@
 Разработка Spring/JPA Enterprise приложения (without frontend) c правами доступа на основе ролей с использованием наиболее популярных инструментов и технологий Java: Maven, Spring Boot, Security, JPA(Hibernate), REST(Jackson), datatables, jQuery + plugins, Lombok, Swagger Java 11 Stream and Time API и хранением в базе HSQLDB.
 
-
-
-
+**Просмотр функционала и методов:**
+http://localhost:8080/swagger-ui.html#/
+Для входа 
+User: 'user@yandex.ru' пароль: 'password' (без кавычек)
+Admin: 'admin@gmail.com' пароль: 'admin'  (без кавычек)
 
 Design and implement a REST API using Hibernate / Spring / SpringMVC (or Spring-Boot) without frontend.
 
-The task is:
+**The task is:**
 vouting
 Build a voting system for deciding where to have lunch.
 enabled
@@ -25,10 +27,10 @@ As a result, provide a link to github repository.
 It should contain the code and README.md with API documentation and curl commands to get data for voting and vote.
 
 
-Описание проекта: 
+**Описание проекта:** 
+Реализован функционал голосование юзеров за рестораны, с учетом данного условия снятия голосов и невозможности проголосовать за один и тот же ресторан повторно.
 
-
-DishController
+**DishController**
 1) GetAll
 
 curl --location --request GET 'localhost:8080/rest/admin/dishes' \
@@ -73,7 +75,7 @@ curl --location --request PUT 'localhost:8080/rest/admin/dishes/' \
 curl --location --request DELETE 'localhost:8080/rest/admin/dishes/1' \
 --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'
 
-Restaurants Controller
+**Restaurants Controller**
 1) CreateWithLocation
 
 curl --location --request POST 'localhost:8080/rest/admin/restaurants' \
@@ -100,5 +102,32 @@ curl --location --request GET 'localhost:8080/rest/admin/restaurants/byname' \
 
 4) Update Rest
 
-
 5) GetbyName
+
+6) Get
+
+7) GetAll
+
+8) Delete
+
+
+
+**User Controller**
+1) GetByMailUser-
+2) Get
+3) CreateWithLocation-
+4) GetNotFound
+5) GetAll
+6) Update
+7) Delete
+8) Enable 
+
+**VoteHistoryController**
+1) Delete
+2) GetAll
+3) GetNotFound
+4) FindAllSorted
+5) Get
+7) FindAllByRestaurantId
+8) FindAllSortedBetween
+9) FindAllSortedByScore

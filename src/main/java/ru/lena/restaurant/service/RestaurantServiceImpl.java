@@ -101,18 +101,24 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Transactional
     public void voteForRestaurant(long userId, long restaurantId) {
         checkVotingAllow();
+        UserVote vote = voteService.getByUserId(userId);
 
-        if (voteService.isVoteExists(userId)) {
-            UserVote vote = voteService.getByUserId(userId);
-            voteService.deleteVoteByUserId(userId);
-            Restaurant old = get(vote.getRestaurantId());
-            old.setScore(old.getScore() - 1);
-            update(old);
+
+        if (vote != null) {
+            if (vote.getRestaurantId().equals(restaurantId)) {
+                return;
+            } else {
+                voteService.deleteAllForUSer(userId);
+                Restaurant old = get(vote.getRestaurantId());
+                old.setScore(old.getScore() - 1);
+                update(old);
+            }
         }
         voteService.addVote(userId, restaurantId);
         Restaurant newOne = get(restaurantId);
         newOne.setScore(newOne.getScore() + 1);
         update(newOne);
+
     }
 
     /**
@@ -122,7 +128,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Scheduled(cron = "0 10 23 * * ?")
     @CacheEvict(value = {"restaurants", "sortedByNameRestaurants"}, allEntries = true)
     @Transactional
-    public void updateVoteHistory() {
+    public void cleanVotes() {
         log.info("clean all restaurant scores");
         List<Restaurant> restaurants = getAll();
         restaurants.forEach(restaurant -> restaurant.setScore(0));

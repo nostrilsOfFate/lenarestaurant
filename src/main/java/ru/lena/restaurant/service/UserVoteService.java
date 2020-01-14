@@ -7,4 +7,5 @@ public interface UserVoteService {
     UserVote getByUserId(long userId);
     void deleteVoteByUserId(long userId);
     UserVote addVote(long userId, long restaurantId);
+    void deleteAllForUSer(long userId);
 }

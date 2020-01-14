@@ -13,7 +13,9 @@ import javax.validation.constraints.Size;
 import java.beans.ConstructorProperties;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -33,7 +35,7 @@ public class RestaurantTo extends BaseTo implements Serializable {
 
     @NotBlank
     @SafeHtml
-    private Set<Dish> menu = new HashSet<>();
+    private Set<DishTo> menu = new HashSet<>();
 
     @Range(min = 0)
     @NotBlank
@@ -41,7 +43,7 @@ public class RestaurantTo extends BaseTo implements Serializable {
     BigDecimal allDishPrice = BigDecimal.ZERO;
 
 
-    public RestaurantTo(String name, Integer score, BigDecimal allDishPrice,Set<Dish> menu) {
+    public RestaurantTo(String name, Integer score, BigDecimal allDishPrice, Set<DishTo> menu) {
         this.name = name;
         this.score = score;
         this.allDishPrice = allDishPrice;
